@@ -1,0 +1,60 @@
+<h1>Willkommen beim Rechner für die CRAMER'sche Regel</h1>
+<p>Bitte geben Sie unten eine Matrix nach der folgenden Vorlage ein:</p>
+
+<br>
+
+<img src="./assets/images/matrixExample.jpg" alt="Matrix Vorlage" height="120">
+<br><br><br>
+
+<div class="calc-container">
+
+    <div style="flex-grow: 2;">
+
+        <form [formGroup]="matrixForm" (ngSubmit)="onSubmit(matrixForm.value)">
+
+            <div *ngFor="let matrix of matrixIndex">
+                <label for="{{matrix}}">
+                    Wert von {{matrix}}:
+                </label>
+                <div style="width: 20px;">
+                    <input id="{{matrix}}" formControlName="{{matrix}}">
+                </div>
+
+                <br>
+            </div>
+
+            <br>
+
+            <button class="button" type="submit">Berechnen</button>
+
+        </form>
+
+    </div>
+
+    <div style="flex-grow: 5;">
+
+        <div *ngIf="matrixSolution['solved'] == true; else unsolved">
+            <h3>Ergebnis:</h3>
+            <div>
+                x = {{matrixSolution['x']}}
+                <br>
+                y = {{matrixSolution['y']}}
+            </div>
+        </div>
+
+        <ng-template #unsolved>
+            <div *ngIf="matrixSolution['noSolution'] != null">
+                <h3>Ergebnis:</h3>
+                {{matrixSolution['noSolution']}}
+            </div>
+        </ng-template>
+
+
+    </div>
+
+
+</div>
+
+<br>
+<br>
+<br>
